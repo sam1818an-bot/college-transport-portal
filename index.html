@@ -565,3 +565,160 @@ Bus 04
 
 <td>
 East
+    </td>
+
+<td>
+Bus 04
+</td>
+
+<td>
+08:10 AM
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<!-- INFORMATION -->
+
+<div class="info">
+
+<h2>Transport Information</h2>
+
+<p>
+The College Transport Information Portal provides
+students with important details about college buses,
+routes, pickup locations and pickup timings.
+</p>
+
+<p>
+Students can use the search option to quickly find
+a bus, route or pickup point. The bus filter can also
+be used to display a specific bus route.
+</p>
+
+</div>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+© 2026 College Transport Information Portal
+</p>
+
+<p>
+HTML • CSS • JavaScript
+</p>
+
+</footer>
+
+
+<script>
+
+/* SEARCH FUNCTION */
+
+function searchTransport(){
+
+    let input =
+        document.getElementById("searchBox")
+        .value
+        .toLowerCase()
+        .trim();
+
+    let routes =
+        document.querySelectorAll(".route");
+
+    let rows =
+        document.querySelectorAll("tbody tr");
+
+
+    /* Search bus route cards */
+
+    routes.forEach(function(route){
+
+        let text =
+            route.innerText.toLowerCase();
+
+        if(input === "" || text.includes(input)){
+
+            route.style.display = "block";
+
+        }else{
+
+            route.style.display = "none";
+
+        }
+
+    });
+
+
+    /* Search pickup table */
+
+    rows.forEach(function(row){
+
+        let text =
+            row.innerText.toLowerCase();
+
+        if(input === "" || text.includes(input)){
+
+            row.style.display = "table-row";
+
+        }else{
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* BUS FILTER FUNCTION */
+
+function filterBus(){
+
+    let selectedBus =
+        document.getElementById("busFilter").value;
+
+    let routes =
+        document.querySelectorAll(".route");
+
+
+    routes.forEach(function(route){
+
+        let bus =
+            route.getAttribute("data-bus");
+
+        if(
+            selectedBus === "all" ||
+            bus === selectedBus
+        ){
+
+            route.style.display = "block";
+
+        }else{
+
+            route.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>
