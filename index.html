@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>College Transport Information Portal</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#17233c;
+}
+
+/* HEADER */
+
+header{
+    background:#123d73;
+    color:white;
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:bold;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:14px;
+}
+
+/* HERO */
+
+.hero{
+    background:linear-gradient(135deg,#e7f2ff,#ffffff);
+    padding:65px 6%;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#5d6b7d;
+    font-size:17px;
+    max-width:650px;
+    line-height:1.6;
+}
+
+.search{
+    margin-top:25px;
+    max-width:700px;
+    background:white;
+    padding:7px;
+    border-radius:12px;
+    display:flex;
+    box-shadow:0 8px 25px rgba(0,0,0,.1);
+}
+
+.search input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:15px;
+    font-size:15px;
+}
+
+.search button{
+    background:#1769aa;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:0 25px;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:35px 20px;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.stat{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.number{
+    color:#1769aa;
+    font-size:32px;
+    font-weight:bold;
+}
+
+.label{
+    color:#718096;
+    margin-top:8px;
+}
+
+/* SECTION */
+
+.section-title{
+    margin:45px 0 20px;
+    font-size:28px;
+}
+
+/* ROUTES */
+
+.routes{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.route{
+    background:white;
+    padding:22px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.badge{
+    background:#e6f2ff;
+    color:#1769aa;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.route h3{
+    margin:18px 0 12px;
+}
+
+.route p{
+    color:#68778a;
+    line-height:1.7;
+}
+
+/* FILTER */
+
+.filter{
+    margin-bottom:20px;
+}
+
+.filter select{
+    padding:11px 15px;
+    border:1px solid #d5dce5;
+    border-radius:8px;
+    background:white;
+}
+
+/* TABLE */
+
+.table-box{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:16px;
+    text-align:left;
+    border-bottom:1px solid #edf1f5;
+}
+
+th{
+    background:#edf5fc;
+}
+
+/* INFO */
+
+.info{
+    margin-top:25px;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.info p{
+    color:#68778a;
+    line-height:1.7;
+    margin-top:10px;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:50px;
+    background:#123d73;
+    color:white;
+    text-align:center;
+    padding:30px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    nav{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .routes{
+        grid-template-columns:1fr;
+    }
+
+    .search{
+        height:55px;
+    }
+
+    .search input{
+        min-width:0;
+    }
+
+    .search button{
+        padding:0 15px;
+    }
+
+    table{
+        font-size:13px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+<div class="logo">
+🚌 College Transport
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#routes">Bus Routes</a>
+<a href="#pickup">Pickup Points</a>
+<a href="#search">Search</a>
+</nav>
+
+</header>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+<h1>College Transport Information Portal</h1>
+
+<p>
+Access bus numbers, routes, pickup points and timings
+quickly through a simple and user-friendly college
+transport information portal.
+</p>
+
+
+<div class="search" id="search">
+
+<input
+type="text"
+id="searchBox"
+placeholder="Search bus, route or pickup point..."
+onkeyup="searchTransport()"
+>
+
+<button onclick="searchTransport()">
+Search
+</button>
+
+</div>
+
+</section>
+
+
+<main class="container">
+
+
+<!-- DASHBOARD -->
+
+<section class="stats">
+
+<div class="stat">
+
+<div class="number">12</div>
+
+<div class="label">
+Available Buses
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="number">08</div>
+
+<div class="label">
+Bus Routes
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div class="number">24</div>
+
+<div class="label">
+Pickup Points
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- BUS ROUTES -->
+
+<h2 class="section-title" id="routes">
+Bus Routes
+</h2>
+
+
+<div class="filter">
+
+<select id="busFilter" onchange="filterBus()">
+
+<option value="all">
+All Buses
+</option>
+
+<option value="bus01">
+Bus 01
+</option>
+
+<option value="bus02">
+Bus 02
+</option>
+
+<option value="bus03">
+Bus 03
+</option>
+
+</select>
+
+</div>
+
+
+<div class="routes" id="routeList">
+
+
+<div class="route" data-bus="bus01">
+
+<span class="badge">
+BUS 01
+</span>
+
+<h3>
+City Center → Main Campus
+</h3>
+
+<p>
+Starting Point: City Center
+<br>
+Destination: Main Campus
+</p>
+
+</div>
+
+
+
+<div class="route" data-bus="bus02">
+
+<span class="badge">
+BUS 02
+</span>
+
+<h3>
+Railway Station → Main Campus
+</h3>
+
+<p>
+Starting Point: Railway Station
+<br>
+Destination: Main Campus
+</p>
+
+</div>
+
+
+
+<div class="route" data-bus="bus03">
+
+<span class="badge">
+BUS 03
+</span>
+
+<h3>
+North Gate → Main Campus
+</h3>
+
+<p>
+Starting Point: North Gate
+<br>
+Destination: Main Campus
+</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- PICKUP POINTS -->
+
+<h2 class="section-title" id="pickup">
+Pickup Points & Timings
+</h2>
+
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Pickup Location
+</th>
+
+<th>
+Bus Number
+</th>
+
+<th>
+Pickup Timing
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+<tr>
+
+<td>
+City Center
+</td>
+
+<td>
+Bus 01
+</td>
+
+<td>
+07:30 AM
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Railway Station
+</td>
+
+<td>
+Bus 02
+</td>
+
+<td>
+07:45 AM
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+North Gate
+</td>
+
+<td>
+Bus 03
+</td>
+
+<td>
+08:00 AM
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Central Market
+</td>
+
+<td>
+Bus 04
+</td>
+
+<td>
+08:10 AM
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+East
