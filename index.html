@@ -18,6 +18,7 @@ body{
     font-family:Arial, sans-serif;
     background:#f4f7fb;
     color:#17233c;
+    line-height:1.5;
 }
 
 /* HEADER */
@@ -29,6 +30,9 @@ header{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    position:sticky;
+    top:0;
+    z-index:100;
 }
 
 .logo{
@@ -42,6 +46,11 @@ nav a{
     margin-left:25px;
     font-size:14px;
 }
+
+nav a:hover{
+    text-decoration:underline;
+}
+
 
 /* HERO */
 
@@ -61,6 +70,9 @@ nav a{
     max-width:650px;
     line-height:1.6;
 }
+
+
+/* SEARCH */
 
 .search{
     margin-top:25px;
@@ -87,7 +99,13 @@ nav a{
     border-radius:8px;
     padding:0 25px;
     cursor:pointer;
+    font-size:14px;
 }
+
+.search button:hover{
+    background:#0f568c;
+}
+
 
 /* MAIN */
 
@@ -96,6 +114,7 @@ nav a{
     margin:auto;
     padding:35px 20px;
 }
+
 
 /* STATS */
 
@@ -110,6 +129,7 @@ nav a{
     padding:25px;
     border-radius:15px;
     box-shadow:0 5px 20px rgba(0,0,0,.07);
+    text-align:center;
 }
 
 .number{
@@ -123,12 +143,36 @@ nav a{
     margin-top:8px;
 }
 
+
 /* SECTION */
 
 .section-title{
     margin:45px 0 20px;
     font-size:28px;
 }
+
+
+/* ROUTE FILTER */
+
+.filter{
+    margin-bottom:20px;
+}
+
+.filter label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.filter select{
+    padding:11px 15px;
+    border:1px solid #d5dce5;
+    border-radius:8px;
+    background:white;
+    font-size:14px;
+    min-width:180px;
+}
+
 
 /* ROUTES */
 
@@ -143,9 +187,15 @@ nav a{
     padding:22px;
     border-radius:15px;
     box-shadow:0 5px 20px rgba(0,0,0,.07);
+    transition:transform .2s;
+}
+
+.route:hover{
+    transform:translateY(-3px);
 }
 
 .badge{
+    display:inline-block;
     background:#e6f2ff;
     color:#1769aa;
     padding:6px 12px;
@@ -156,6 +206,7 @@ nav a{
 
 .route h3{
     margin:18px 0 12px;
+    font-size:18px;
 }
 
 .route p{
@@ -163,18 +214,6 @@ nav a{
     line-height:1.7;
 }
 
-/* FILTER */
-
-.filter{
-    margin-bottom:20px;
-}
-
-.filter select{
-    padding:11px 15px;
-    border:1px solid #d5dce5;
-    border-radius:8px;
-    background:white;
-}
 
 /* TABLE */
 
@@ -198,9 +237,15 @@ th,td{
 
 th{
     background:#edf5fc;
+    color:#17233c;
 }
 
-/* INFO */
+tr:last-child td{
+    border-bottom:none;
+}
+
+
+/* INFORMATION */
 
 .info{
     margin-top:25px;
@@ -210,11 +255,29 @@ th{
     box-shadow:0 5px 20px rgba(0,0,0,.07);
 }
 
+.info h2{
+    margin-bottom:10px;
+}
+
 .info p{
     color:#68778a;
     line-height:1.7;
     margin-top:10px;
 }
+
+
+/* NO RESULTS */
+
+.no-results{
+    display:none;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    color:#68778a;
+    margin-top:15px;
+}
+
 
 /* FOOTER */
 
@@ -226,16 +289,33 @@ footer{
     padding:30px;
 }
 
+footer p{
+    margin:5px 0;
+}
+
+
 /* MOBILE */
 
 @media(max-width:700px){
+
+    header{
+        padding:16px 20px;
+    }
 
     nav{
         display:none;
     }
 
+    .hero{
+        padding:45px 20px;
+    }
+
     .hero h1{
         font-size:32px;
+    }
+
+    .hero p{
+        font-size:15px;
     }
 
     .stats{
@@ -252,14 +332,28 @@ footer{
 
     .search input{
         min-width:0;
+        font-size:14px;
     }
 
     .search button{
         padding:0 15px;
     }
 
+    .table-box{
+        overflow-x:auto;
+    }
+
     table{
+        min-width:550px;
+    }
+
+    th,td{
         font-size:13px;
+        padding:12px;
+    }
+
+    .section-title{
+        font-size:24px;
     }
 
 }
@@ -267,7 +361,9 @@ footer{
 </style>
 </head>
 
+
 <body>
+
 
 <!-- HEADER -->
 
@@ -278,20 +374,28 @@ footer{
 </div>
 
 <nav>
+
 <a href="#home">Home</a>
+
 <a href="#routes">Bus Routes</a>
+
 <a href="#pickup">Pickup Points</a>
+
 <a href="#search">Search</a>
+
 </nav>
 
 </header>
+
 
 
 <!-- HOME -->
 
 <section class="hero" id="home">
 
-<h1>College Transport Information Portal</h1>
+<h1>
+College Transport Information Portal
+</h1>
 
 <p>
 Access bus numbers, routes, pickup points and timings
@@ -299,6 +403,8 @@ quickly through a simple and user-friendly college
 transport information portal.
 </p>
 
+
+<!-- SEARCH -->
 
 <div class="search" id="search">
 
@@ -318,6 +424,7 @@ Search
 </section>
 
 
+
 <main class="container">
 
 
@@ -327,7 +434,9 @@ Search
 
 <div class="stat">
 
-<div class="number">12</div>
+<div class="number">
+5
+</div>
 
 <div class="label">
 Available Buses
@@ -338,7 +447,9 @@ Available Buses
 
 <div class="stat">
 
-<div class="number">08</div>
+<div class="number">
+5
+</div>
 
 <div class="label">
 Bus Routes
@@ -349,7 +460,9 @@ Bus Routes
 
 <div class="stat">
 
-<div class="number">24</div>
+<div class="number">
+5
+</div>
 
 <div class="label">
 Pickup Points
@@ -370,6 +483,10 @@ Bus Routes
 
 <div class="filter">
 
+<label for="busFilter">
+Filter by Bus
+</label>
+
 <select id="busFilter" onchange="filterBus()">
 
 <option value="all">
@@ -388,13 +505,24 @@ Bus 02
 Bus 03
 </option>
 
+<option value="bus04">
+Bus 04
+</option>
+
+<option value="bus05">
+Bus 05
+</option>
+
 </select>
 
 </div>
 
 
+
 <div class="routes" id="routeList">
 
+
+<!-- BUS 01 -->
 
 <div class="route" data-bus="bus01">
 
@@ -416,6 +544,8 @@ Destination: Main Campus
 
 
 
+<!-- BUS 02 -->
+
 <div class="route" data-bus="bus02">
 
 <span class="badge">
@@ -436,6 +566,8 @@ Destination: Main Campus
 
 
 
+<!-- BUS 03 -->
+
 <div class="route" data-bus="bus03">
 
 <span class="badge">
@@ -455,6 +587,56 @@ Destination: Main Campus
 </div>
 
 
+
+<!-- BUS 04 -->
+
+<div class="route" data-bus="bus04">
+
+<span class="badge">
+BUS 04
+</span>
+
+<h3>
+Central Market → Main Campus
+</h3>
+
+<p>
+Starting Point: Central Market
+<br>
+Destination: Main Campus
+</p>
+
+</div>
+
+
+
+<!-- BUS 05 -->
+
+<div class="route" data-bus="bus05">
+
+<span class="badge">
+BUS 05
+</span>
+
+<h3>
+East Junction → Main Campus
+</h3>
+
+<p>
+Starting Point: East Junction
+<br>
+Destination: Main Campus
+</p>
+
+</div>
+
+
+</div>
+
+
+<div class="no-results" id="routeNoResults">
+
+No matching bus route found.
 </div>
 
 
@@ -492,6 +674,7 @@ Pickup Timing
 
 
 <tbody>
+
 
 <tr>
 
@@ -564,18 +747,19 @@ Bus 04
 <tr>
 
 <td>
-East
-    </td>
-
-<td>
-Bus 04
+East Junction
 </td>
 
 <td>
-08:10 AM
+Bus 05
+</td>
+
+<td>
+08:20 AM
 </td>
 
 </tr>
+
 
 </tbody>
 
@@ -584,11 +768,14 @@ Bus 04
 </div>
 
 
+
 <!-- INFORMATION -->
 
 <div class="info">
 
-<h2>Transport Information</h2>
+<h2>
+Transport Information
+</h2>
 
 <p>
 The College Transport Information Portal provides
@@ -602,10 +789,17 @@ a bus, route or pickup point. The bus filter can also
 be used to display a specific bus route.
 </p>
 
+<p>
+This website demonstrates the practical use of
+HTML, CSS and JavaScript with a responsive design
+for mobile and desktop devices.
+</p>
+
 </div>
 
 
 </main>
+
 
 
 <!-- FOOTER -->
@@ -613,14 +807,19 @@ be used to display a specific bus route.
 <footer>
 
 <p>
-© 2026 College Transport Information Portal
+<strong>College Transport Information Portal</strong>
 </p>
 
 <p>
 HTML • CSS • JavaScript
 </p>
 
+<p>
+© 2026 College Transport Information Portal
+</p>
+
 </footer>
+
 
 
 <script>
@@ -641,8 +840,11 @@ function searchTransport(){
     let rows =
         document.querySelectorAll("tbody tr");
 
+    let routeFound = false;
+    let rowFound = false;
 
-    /* Search bus route cards */
+
+    /* SEARCH BUS ROUTES */
 
     routes.forEach(function(route){
 
@@ -653,6 +855,8 @@ function searchTransport(){
 
             route.style.display = "block";
 
+            routeFound = true;
+
         }else{
 
             route.style.display = "none";
@@ -662,7 +866,7 @@ function searchTransport(){
     });
 
 
-    /* Search pickup table */
+    /* SEARCH PICKUP TABLE */
 
     rows.forEach(function(row){
 
@@ -673,6 +877,8 @@ function searchTransport(){
 
             row.style.display = "table-row";
 
+            rowFound = true;
+
         }else{
 
             row.style.display = "none";
@@ -680,6 +886,22 @@ function searchTransport(){
         }
 
     });
+
+
+    /* NO ROUTE MESSAGE */
+
+    let noResults =
+        document.getElementById("routeNoResults");
+
+    if(input !== "" && !routeFound){
+
+        noResults.style.display = "block";
+
+    }else{
+
+        noResults.style.display = "none";
+
+    }
 
 }
 
@@ -719,6 +941,6 @@ function filterBus(){
 
 </script>
 
-</body>
 
+</body>
 </html>
